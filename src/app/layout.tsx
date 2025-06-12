@@ -4,6 +4,27 @@ import "styles/globals.css"
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
+  title: {
+    template: "%s | KKEmpire",
+    default: "KKEmpire - Fashion, Beauty & Hair Services",
+  },
+  description:
+    "Discover KKEmpire - Your one-stop destination for fashion, beauty, and hair services. Featuring KKWears clothing, KK.Hairs styling, and KK.Beauty spa services.",
+  keywords: [
+    "fashion",
+    "beauty",
+    "hair services",
+    "spa",
+    "wig installation",
+    "braiding",
+    "nail tech",
+    "barbing",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "KKEmpire",
+  },
 }
 
 export default function RootLayout(props: { children: React.ReactNode }) {

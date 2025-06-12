@@ -6,9 +6,17 @@ import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 
 export const metadata: Metadata = {
-  title: "Medusa Next.js Starter Template",
+  title: "KKEmpire - Fashion, Beauty & Hair Services",
   description:
-    "A performant frontend ecommerce starter template with Next.js 15 and Medusa.",
+    "Discover KKEmpire's luxury fashion, professional hair styling, and premium beauty services. Experience the perfect blend of style and sophistication.",
+  keywords: [
+    "fashion",
+    "beauty",
+    "hair services",
+    "spa",
+    "wig installation",
+    "Nigerian fashion",
+  ],
 }
 
 export default async function Home(props: {

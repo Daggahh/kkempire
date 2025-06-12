@@ -24,6 +24,13 @@
       {
         "name": "next"
       }
+    ],
+    "types": [
+      "node",
+      "react",
+      "react-dom",
+      "react-instantsearch-core",
+      "react-instantsearch-dom"
     ]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

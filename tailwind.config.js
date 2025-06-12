@@ -34,6 +34,12 @@ module.exports = {
           80: "#1F2937",
           90: "#111827",
         },
+        empire: {
+          sand: "#CBB6A3",
+          taupe: "#897366",
+          brown: "#482A12",
+          gold: "#D49D5D",
+        },
       },
       borderRadius: {
         none: "0px",
