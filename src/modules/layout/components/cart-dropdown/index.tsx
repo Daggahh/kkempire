@@ -82,7 +82,7 @@ const CartDropdown = ({
       <Popover className="relative h-full">
         <PopoverButton className="h-full">
           <LocalizedClientLink
-            className="hover:text-ui-fg-base"
+            className="hover:text-empire-gold text-empire-brown"
             href="/cart"
             data-testid="nav-cart-link"
           >{`Cart (${totalItems})`}</LocalizedClientLink>
@@ -99,7 +99,7 @@ const CartDropdown = ({
         >
           <PopoverPanel
             static
-            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-white border-x border-b border-gray-200 w-[420px] text-ui-fg-base"
+            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-empire-sand/20 backdrop-blur-md border-x border-b border-empire-taupe/20 w-[420px] text-empire-brown z-50"
             data-testid="nav-cart-dropdown"
           >
             <div className="p-4 flex items-center justify-center">
@@ -176,7 +176,7 @@ const CartDropdown = ({
                 </div>
                 <div className="p-4 flex flex-col gap-y-4 text-small-regular">
                   <div className="flex items-center justify-between">
-                    <span className="text-ui-fg-base font-semibold">
+                    <span className="text-empire-brown font-semibold">
                       Subtotal{" "}
                       <span className="font-normal">(excl. taxes)</span>
                     </span>
@@ -193,7 +193,7 @@ const CartDropdown = ({
                   </div>
                   <LocalizedClientLink href="/cart" passHref>
                     <Button
-                      className="w-full"
+                      className="w-full bg-empire-gold text-white hover:bg-empire-brown"
                       size="large"
                       data-testid="go-to-cart-button"
                     >
@@ -205,7 +205,7 @@ const CartDropdown = ({
             ) : (
               <div>
                 <div className="flex py-16 flex-col gap-y-4 items-center justify-center">
-                  <div className="bg-gray-900 text-small-regular flex items-center justify-center w-6 h-6 rounded-full text-white">
+                  <div className="bg-empire-brown text-small-regular flex items-center justify-center w-6 h-6 rounded-full text-empire-sand">
                     <span>0</span>
                   </div>
                   <span>Your shopping bag is empty.</span>
@@ -213,7 +213,12 @@ const CartDropdown = ({
                     <LocalizedClientLink href="/store">
                       <>
                         <span className="sr-only">Go to all products page</span>
-                        <Button onClick={close}>Explore products</Button>
+                        <Button
+                          onClick={close}
+                          className="bg-empire-gold text-white hover:bg-empire-brown"
+                        >
+                          Explore products
+                        </Button>
                       </>
                     </LocalizedClientLink>
                   </div>
