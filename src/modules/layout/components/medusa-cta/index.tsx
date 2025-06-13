@@ -1,23 +1,18 @@
 import { Text } from "@medusajs/ui"
 
-import Medusa from "../../../common/icons/medusa"
 import NextJs from "../../../common/icons/nextjs"
-import { SkullIcon } from "lucide-react"
+import { Crown } from "lucide-react"
 
 const MedusaCTA = () => {
   return (
     <Text className="flex gap-x-2 txt-compact-small-plus items-center">
-      Powered by
-      <a href="https://www.medusajs.com" target="_blank" rel="noreferrer">
-        <Medusa fill="#9ca3af" className="fill-[#9ca3af]" />
-      </a>
-      &
+      Crafted with
       <a href="https://nextjs.org" target="_blank" rel="noreferrer">
         <NextJs fill="#9ca3af" />
       </a>
       &
       <a href="https://odidi-portfolio.vercel.app/" target="_blank" rel="noreferrer">
-        <SkullIcon fill="#9ca3af" size={20} />
+        <Crown fill="#9ca3af" size={20} className="text-[#9ca3af]" />
       </a>
     </Text>
   )

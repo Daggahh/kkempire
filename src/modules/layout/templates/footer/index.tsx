@@ -1,6 +1,7 @@
 import { listCategories } from "@lib/data/categories"
 import { listCollections } from "@lib/data/collections"
 import { Text, clx } from "@medusajs/ui"
+import { Instagram, PhoneCall } from "lucide-react"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import MedusaCTA from "@modules/layout/components/medusa-cta"
@@ -12,25 +13,44 @@ export default async function Footer() {
   const productCategories = await listCategories()
 
   return (
-    <footer className="border-t border-ui-border-base w-full">
+    <footer className="border-t border-[#897366]/20 dark:border-empire-taupe/40 bg-empire-sand/50 dark:bg-empire-midnight w-full">
       <div className="content-container flex flex-col w-full">
         <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between py-40">
-          <div>
+          <div className="flex flex-col items-start gap-4">
             <LocalizedClientLink
               href="/"
-              className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
+              className="txt-compact-xlarge-plus text-[#482A12] dark:text-empire-sand hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors duration-300 uppercase"
             >
               KKEmpire
             </LocalizedClientLink>
+            {/* Social icons */}
+            <div className="flex gap-4">
+              <a
+                href="https://www.instagram.com/kk.empire/?hl=en"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-5 h-5 text-[#482A12] dark:text-empire-sand hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors duration-300" />
+              </a>
+              <a
+                href="https://wa.me/2340000000000"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="WhatsApp"
+              >
+                <PhoneCall className="w-5 h-5 text-[#482A12] dark:text-empire-sand hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors duration-300" />
+              </a>
+            </div>
           </div>
           <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3">
             {productCategories && productCategories?.length > 0 && (
               <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
+                <span className="txt-small-plus text-[#482A12] dark:text-empire-sand">
                   Categories
                 </span>
                 <ul
-                  className="grid grid-cols-1 gap-2"
+                  className="grid grid-cols-1 gap-2 text-[#897366] dark:text-empire-taupe txt-small"
                   data-testid="footer-categories"
                 >
                   {productCategories?.slice(0, 6).map((c) => {
@@ -47,12 +67,12 @@ export default async function Footer() {
 
                     return (
                       <li
-                        className="flex flex-col gap-2 text-ui-fg-subtle txt-small"
+                        className="flex flex-col gap-2 text-[#897366] dark:text-empire-taupe txt-small"
                         key={c.id}
                       >
                         <LocalizedClientLink
                           className={clx(
-                            "hover:text-ui-fg-base",
+                            "hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors",
                             children && "txt-small-plus"
                           )}
                           href={`/categories/${c.handle}`}
@@ -66,7 +86,7 @@ export default async function Footer() {
                               children.map((child) => (
                                 <li key={child.id}>
                                   <LocalizedClientLink
-                                    className="hover:text-ui-fg-base"
+                                    className="hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors"
                                     href={`/categories/${child.handle}`}
                                     data-testid="category-link"
                                   >
@@ -84,12 +104,12 @@ export default async function Footer() {
             )}
             {collections && collections.length > 0 && (
               <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
+                <span className="txt-small-plus text-[#482A12] dark:text-empire-sand">
                   Collections
                 </span>
                 <ul
                   className={clx(
-                    "grid grid-cols-1 gap-2 text-ui-fg-subtle txt-small",
+                    "grid grid-cols-1 gap-2 text-[#897366] dark:text-empire-taupe txt-small",
                     {
                       "grid-cols-2": (collections?.length || 0) > 3,
                     }
@@ -98,7 +118,7 @@ export default async function Footer() {
                   {collections?.slice(0, 6).map((c) => (
                     <li key={c.id}>
                       <LocalizedClientLink
-                        className="hover:text-ui-fg-base"
+                        className="hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors"
                         href={`/collections/${c.handle}`}
                       >
                         {c.title}
@@ -109,14 +129,16 @@ export default async function Footer() {
               </div>
             )}
             <div className="flex flex-col gap-y-2">
-              <span className="txt-small-plus txt-ui-fg-base">Medusa</span>
-              <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle txt-small">
+              <span className="txt-small-plus text-[#482A12] dark:text-empire-sand">
+                Company
+              </span>
+              <ul className="grid grid-cols-1 gap-y-2 text-[#897366] dark:text-empire-taupe txt-small">
                 <li>
                   <a
                     href="https://github.com/medusajs"
                     target="_blank"
                     rel="noreferrer"
-                    className="hover:text-ui-fg-base"
+                    className="hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors"
                   >
                     GitHub
                   </a>
@@ -126,9 +148,9 @@ export default async function Footer() {
                     href="https://docs.medusajs.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="hover:text-ui-fg-base"
+                    className="hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors"
                   >
-                    Documentation
+                    About Us
                   </a>
                 </li>
                 <li>
@@ -136,18 +158,18 @@ export default async function Footer() {
                     href="https://github.com/medusajs/nextjs-starter-medusa"
                     target="_blank"
                     rel="noreferrer"
-                    className="hover:text-ui-fg-base"
+                    className="hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors"
                   >
-                    Source code
+                    Contact
                   </a>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
+        <div className="flex w-full mb-16 justify-between text-[#897366] dark:text-empire-taupe">
           <Text className="txt-compact-small">
-            © {new Date().getFullYear()} KKEMPIRE Store. All rights reserved.
+            {new Date().getFullYear()} KKEMPIRE Store. All rights reserved.
           </Text>
           <MedusaCTA />
         </div>

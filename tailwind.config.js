@@ -65,6 +65,7 @@ module.exports = {
       },
       fontSize: {
         "3xl": "2rem",
+        "10xl": "10rem",
       },
       fontFamily: {
         sans: [
