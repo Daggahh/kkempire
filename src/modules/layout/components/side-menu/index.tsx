@@ -44,7 +44,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                 leaveFrom="opacity-100 backdrop-blur-2xl"
                 leaveTo="opacity-0"
               >
-                <PopoverPanel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-50 inset-x-0 text-sm m-2 bg-empire-sand/20 backdrop-blur-md border border-[#897366]/20 rounded-lg">
+                <PopoverPanel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-50 inset-x-0 text-sm m-2 bg-empire-sand/20 dark:bg-empire-midnight/60 backdrop-blur-md border border-[#897366]/20 dark:border-empire-taupe/40 rounded-lg">
                   <div
                     data-testid="nav-menu-popup"
                     className="flex flex-col h-full justify-between p-6"
@@ -63,7 +63,7 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                         <li key={name}>
                           <LocalizedClientLink
                             href={href}
-                            className="text-3xl leading-10 text-[#482A12] hover:text-[#D49D5D] transition-colors duration-300"
+                            className="text-3xl leading-10 text-[#482A12] dark:text-empire-sand hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors duration-300"
                             onClick={close}
                             data-testid={`${name.toLowerCase()}-link`}
                           >
@@ -86,13 +86,13 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                         )}
                         <ArrowRightMini
                           className={clx(
-                            "transition-transform duration-150 text-[#482A12]",
+                            "transition-transform duration-150 text-[#482A12] dark:text-empire-sand",
                             toggleState.state ? "-rotate-90" : ""
                           )}
                         />
                       </div>
-                      <Text className="flex justify-between txt-compact-small text-[#482A12]">
-                        © {new Date().getFullYear()} KKEmpire. All rights
+                      <Text className="flex justify-between txt-compact-small text-empire-brown dark:text-empire-sand hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors duration-300">
+                        {new Date().getFullYear()} KKEmpire. All rights
                         reserved.
                       </Text>
                     </div>

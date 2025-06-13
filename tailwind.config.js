@@ -39,6 +39,8 @@ module.exports = {
           taupe: "#897366",
           brown: "#482A12",
           gold: "#D49D5D",
+          dark: "#0f0905",
+          midnight: "#1a120d",
         },
       },
       borderRadius: {
@@ -75,6 +77,7 @@ module.exports = {
           "Ubuntu",
           "sans-serif",
         ],
+        heading: ["Bebas Neue", "cursive"],
       },
       keyframes: {
         ring: {

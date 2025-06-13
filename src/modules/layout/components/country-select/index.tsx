@@ -74,7 +74,7 @@ const CountrySelect = ({ toggleState, regions }: CountrySelectProps) => {
         }
       >
         <ListboxButton className="py-1 w-full">
-          <div className="txt-compact-small flex items-start gap-x-2">
+          <div className="txt-compact-small text-empire-brown dark:text-empire-sand flex items-start gap-x-2">
             <span>Shipping to:</span>
             {current && (
               <span className="txt-compact-small flex items-center gap-x-2">
@@ -101,7 +101,7 @@ const CountrySelect = ({ toggleState, regions }: CountrySelectProps) => {
             leaveTo="opacity-0"
           >
             <ListboxOptions
-              className="absolute -bottom-[calc(100%-36px)] left-0 xsmall:left-auto xsmall:right-0 max-h-[442px] overflow-y-scroll z-[900] bg-empire-sand/20 backdrop-blur-md drop-shadow-md text-small-regular uppercase text-empire-brown no-scrollbar rounded-rounded w-full"
+              className="absolute -bottom-[calc(100%-36px)] left-0 xsmall:left-auto xsmall:right-0 max-h-[442px] overflow-y-scroll z-[900] bg-empire-sand dark:bg-empire-midnight border border-[#897366]/20 dark:border-empire-taupe/40 drop-shadow-md text-small-regular uppercase text-empire-brown dark:text-empire-sand no-scrollbar rounded-rounded w-full"
               static
             >
               {options?.map((o, index) => {
