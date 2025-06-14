@@ -53,8 +53,8 @@ const AddAddress = ({
         onClick={open}
         data-testid="add-address-button"
       >
-        <span className="text-base-semi">New address</span>
-        <Plus />
+        <span className="text-base-semi dark:text-empire-sand text-empire-brown">New address</span>
+        <Plus className="dark:text-empire-sand text-empire-brown"/>
       </button>
 
       <Modal isOpen={state} close={close} data-testid="add-address-modal">

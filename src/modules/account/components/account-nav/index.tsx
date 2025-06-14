@@ -30,7 +30,7 @@ const AccountNav = ({
         {route !== `/${countryCode}/account` ? (
           <LocalizedClientLink
             href="/account"
-            className="flex items-center gap-x-2 text-small-regular py-2"
+            className="flex items-center gap-x-2 text-small-regular py-2 dark:text-empire-sand text-empire-brown"
             data-testid="account-main-link"
           >
             <>
@@ -40,10 +40,10 @@ const AccountNav = ({
           </LocalizedClientLink>
         ) : (
           <>
-            <div className="text-xl-semi mb-4 px-8">
+            <div className="text-xl-semi mb-4 px-8 dark:text-empire-sand text-empire-brown">
               Hello {customer?.first_name}
             </div>
-            <div className="text-base-regular">
+            <div className="text-base-regular dark:text-empire-sand text-empire-brown">
               <ul>
                 <li>
                   <LocalizedClientLink
@@ -110,7 +110,9 @@ const AccountNav = ({
       <div className="hidden small:block" data-testid="account-nav">
         <div>
           <div className="pb-4">
-            <h3 className="text-base-semi">Account</h3>
+            <h3 className="text-base-semi dark:text-empire-sand text-empire-brown">
+              Account
+            </h3>
           </div>
           <div className="text-base-regular">
             <ul className="flex mb-0 justify-start items-start flex-col gap-y-4">
@@ -150,7 +152,7 @@ const AccountNav = ({
                   Orders
                 </AccountNavLink>
               </li>
-              <li className="text-grey-700">
+              <li className="text-grey-700 dark:text-empire-sand text-empire-brown">
                 <button
                   type="button"
                   onClick={handleLogout}
