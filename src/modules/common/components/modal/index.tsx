@@ -65,7 +65,7 @@ const Modal = ({
                     "max-w-xl": size === "medium",
                     "max-w-3xl": size === "large",
                     "bg-transparent shadow-none": search,
-                    "bg-white shadow-xl border rounded-rounded": !search,
+                    "bg-empire-sand/50 dark:bg-empire-midnight shadow-xl border rounded-rounded": !search,
                   }
                 )}
               >
@@ -87,7 +87,7 @@ const Title: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <div className="text-large-semi">{children}</div>
       <div>
         <button onClick={close} data-testid="close-modal-button">
-          <X size={20} />
+          <X size={20} color="#000"/>
         </button>
       </div>
     </Dialog.Title>

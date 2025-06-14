@@ -54,6 +54,43 @@
   input[type="search"]::-webkit-search-results-decoration {
     -webkit-appearance: none;
   }
+
+  /* Custom Scrollbar Styling */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #CBB6A3;  /* empire-sand */
+    border-radius: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #897366;  /* empire-taupe */
+  }
+
+  /* Dark mode scrollbar */
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #897366;  /* empire-taupe */
+  }
+
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #CBB6A3;  /* empire-sand */
+  }
+
+  .custom-scrollbar {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #CBB6A3 transparent; /* Firefox */
+  }
+
+  .dark .custom-scrollbar {
+    scrollbar-color: #897366 transparent; /* Firefox */
+  }
 }
 
 @layer components {
