@@ -17,9 +17,11 @@ const Login = ({ setCurrentView }: Props) => {
       className="max-w-sm w-full flex flex-col items-center"
       data-testid="login-page"
     >
-      <h1 className="text-large-semi uppercase mb-6">Welcome back</h1>
-      <p className="text-center text-base-regular text-ui-fg-base mb-8">
-        Sign in to access an enhanced shopping experience.
+      <h1 className="text-large-semi uppercase mb-6 text-empire-brown dark:text-empire-sand">
+        Welcome back
+      </h1>
+      <p className="text-center text-base-regular text-empire-taupe dark:text-empire-taupe mb-8">
+        Sign in to continue your KKempire journey.
       </p>
       <form className="w-full" action={formAction}>
         <div className="flex flex-col w-full gap-y-2">
@@ -42,15 +44,18 @@ const Login = ({ setCurrentView }: Props) => {
           />
         </div>
         <ErrorMessage error={message} data-testid="login-error-message" />
-        <SubmitButton data-testid="sign-in-button" className="w-full mt-6">
+        <SubmitButton
+          data-testid="sign-in-button"
+          className="w-full mt-6 bg-empire-gold hover:bg-empire-brown dark:hover:bg-empire-brown text-white transition-colors"
+        >
           Sign in
         </SubmitButton>
       </form>
-      <span className="text-center text-ui-fg-base text-small-regular mt-6">
+      <span className="text-center text-empire-taupe dark:text-empire-taupe text-small-regular mt-6">
         Not a member?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
-          className="underline"
+          className="underline text-empire-gold hover:text-empire-brown dark:hover:text-empire-sand transition-colors"
           data-testid="register-button"
         >
           Join us
