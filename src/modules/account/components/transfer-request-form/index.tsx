@@ -26,10 +26,13 @@ export default function TransferRequestForm() {
     <div className="flex flex-col gap-y-4 w-full">
       <div className="grid sm:grid-cols-2 items-center gap-x-8 gap-y-4 w-full">
         <div className="flex flex-col gap-y-1">
-          <Heading level="h3" className="text-lg text-neutral-950">
+          <Heading
+            level="h3"
+            className="text-lg dark:text-empire-sand text-empire-brown"
+          >
             Order transfers
           </Heading>
-          <Text className="text-base-regular text-neutral-500">
+          <Text className="text-base-regular dark:text-empire-sand text-empire-brown">
             Can&apos;t find the order you are looking for?
             <br /> Connect an order to your account.
           </Text>
@@ -39,10 +42,14 @@ export default function TransferRequestForm() {
           className="flex flex-col gap-y-1 sm:items-end"
         >
           <div className="flex flex-col gap-y-2 w-full">
-            <Input className="w-full" name="order_id" placeholder="Order ID" />
+            <Input
+              className="w-full dark:bg-empire-taupe/20 bg-empire-sand/10"
+              name="order_id"
+              placeholder="Order ID"
+            />
             <SubmitButton
               variant="secondary"
-              className="w-fit whitespace-nowrap self-end"
+              className="w-fit whitespace-nowrap self-end dark:bg-empire-taupe bg-empire-brown text-empire-sand hover:bg-empire-brown/80"
             >
               Request transfer
             </SubmitButton>
@@ -55,24 +62,24 @@ export default function TransferRequestForm() {
         </Text>
       )}
       {showSuccess && (
-        <div className="flex justify-between p-4 bg-neutral-50 shadow-borders-base w-full self-stretch items-center">
+        <div className="flex justify-between p-4 dark:bg-empire-taupe/20 bg-empire-sand/10 shadow-borders-base w-full self-stretch items-center rounded-md">
           <div className="flex gap-x-2 items-center">
             <CheckCircleMiniSolid className="w-4 h-4 text-emerald-500" />
             <div className="flex flex-col gap-y-1">
-              <Text className="text-medim-pl text-neutral-950">
+              <Text className="text-medim-pl dark:text-empire-sand text-empire-brown">
                 Transfer for order {state.order?.id} requested
               </Text>
-              <Text className="text-base-regular text-neutral-600">
+              <Text className="text-base-regular dark:text-empire-sand text-empire-brown">
                 Transfer request email sent to {state.order?.email}
               </Text>
             </div>
           </div>
           <IconButton
             variant="transparent"
-            className="h-fit"
+            className="h-fit dark:text-empire-sand text-empire-brown"
             onClick={() => setShowSuccess(false)}
           >
-            <XCircleSolid className="w-4 h-4 text-neutral-500" />
+            <XCircleSolid className="w-4 h-4" />
           </IconButton>
         </div>
       )}

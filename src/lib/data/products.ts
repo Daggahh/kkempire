@@ -7,6 +7,15 @@ import { SortOptions } from "@modules/store/components/refinement-list/sort-prod
 import { getAuthHeaders, getCacheOptions } from "./cookies"
 import { getRegion, retrieveRegion } from "./regions"
 
+// Extended type to include collection_id and other missing properties
+interface ExtendedStoreProductParams extends HttpTypes.StoreProductParams {
+  collection_id?: string | string[]
+  collections?: string[]
+  collection_ids?: string[]
+  sales_channel_id?: string
+  sales_channel_ids?: string[]
+}
+
 export const listProducts = async ({
   pageParam = 1,
   queryParams,
@@ -14,13 +23,13 @@ export const listProducts = async ({
   regionId,
 }: {
   pageParam?: number
-  queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
+  queryParams?: HttpTypes.FindParams & ExtendedStoreProductParams
   countryCode?: string
   regionId?: string
 }): Promise<{
   response: { products: HttpTypes.StoreProduct[]; count: number }
   nextPage: number | null
-  queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
+  queryParams?: HttpTypes.FindParams & ExtendedStoreProductParams
 }> => {
   if (!countryCode && !regionId) {
     throw new Error("Country code or region ID is required")
@@ -28,7 +37,7 @@ export const listProducts = async ({
 
   const limit = queryParams?.limit || 12
   const _pageParam = Math.max(pageParam, 1)
-  const offset = (_pageParam === 1) ? 0 : (_pageParam - 1) * limit;
+  const offset = _pageParam === 1 ? 0 : (_pageParam - 1) * limit
 
   let region: HttpTypes.StoreRegion | undefined | null
 
@@ -53,6 +62,10 @@ export const listProducts = async ({
     ...(await getCacheOptions("products")),
   }
 
+  if (!process.env.NEXT_PUBLIC_DEFAULT_SALES_CHANNEL_ID) {
+    throw new Error("Default sales channel ID is not configured")
+  }
+
   return sdk.client
     .fetch<{ products: HttpTypes.StoreProduct[]; count: number }>(
       `/store/products`,
@@ -62,6 +75,7 @@ export const listProducts = async ({
           limit,
           offset,
           region_id: region?.id,
+          sales_channel_id: process.env.NEXT_PUBLIC_DEFAULT_SALES_CHANNEL_ID,
           fields:
             "*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags",
           ...queryParams,
@@ -96,13 +110,13 @@ export const listProductsWithSort = async ({
   countryCode,
 }: {
   page?: number
-  queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
+  queryParams?: HttpTypes.FindParams & ExtendedStoreProductParams
   sortBy?: SortOptions
   countryCode: string
 }): Promise<{
   response: { products: HttpTypes.StoreProduct[]; count: number }
   nextPage: number | null
-  queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
+  queryParams?: HttpTypes.FindParams & ExtendedStoreProductParams
 }> => {
   const limit = queryParams?.limit || 12
 
