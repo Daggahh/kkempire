@@ -64,11 +64,20 @@ export async function getOrSetCart(countryCode: string) {
   }
 
   if (!cart) {
-    const cartResp = await sdk.store.cart.create(
-      { region_id: region.id },
-      {},
-      headers
-    )
+    // Check if NEXT_PUBLIC_DEFAULT_SALES_CHANNEL_ID is available
+    if (!process.env.NEXT_PUBLIC_DEFAULT_SALES_CHANNEL_ID) {
+      throw new Error("Default sales channel ID is not configured")
+    }
+
+    const cartPayload = {
+      region_id: region.id,
+      sales_channel_id: process.env.NEXT_PUBLIC_DEFAULT_SALES_CHANNEL_ID,
+    }
+
+    console.log("Creating cart with payload:", cartPayload)
+    console.log("Headers:", headers)
+
+    const cartResp = await sdk.store.cart.create(cartPayload, {}, headers)
     cart = cartResp.cart
 
     await setCartId(cart.id)
@@ -276,7 +285,7 @@ export async function applyPromotions(codes: string[]) {
 }
 
 export async function applyGiftCard(code: string) {
-  //   const cartId = getCartId()
+  //   const cartId = await getCartId()
   //   if (!cartId) return "No cartId cookie found"
   //   try {
   //     await updateCart(cartId, { gift_cards: [{ code }] }).then(() => {
@@ -288,7 +297,7 @@ export async function applyGiftCard(code: string) {
 }
 
 export async function removeDiscount(code: string) {
-  // const cartId = getCartId()
+  // const cartId = await getCartId()
   // if (!cartId) return "No cartId cookie found"
   // try {
   //   await deleteDiscount(cartId, code)
@@ -303,7 +312,7 @@ export async function removeGiftCard(
   giftCards: any[]
   // giftCards: GiftCard[]
 ) {
-  //   const cartId = getCartId()
+  //   const cartId = await getCartId()
   //   if (!cartId) return "No cartId cookie found"
   //   try {
   //     await updateCart(cartId, {
@@ -336,7 +345,7 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
     if (!formData) {
       throw new Error("No form data found when setting addresses")
     }
-    const cartId = getCartId()
+    const cartId = await getCartId() 
     if (!cartId) {
       throw new Error("No existing cart found when setting addresses")
     }
