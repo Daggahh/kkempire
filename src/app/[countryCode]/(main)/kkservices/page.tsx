@@ -65,11 +65,11 @@ const services = [
     desc: "Wig installation, sew-ins, braiding, and more.",
   },
   {
-    title: "Beauty & Spa",
+    title: "Beauty",
     icon: (
       <Sparkles className="w-6 h-6 text-empire-gold group-hover:text-empire-brown transition-colors" />
     ),
-    desc: "Facials, spa treatments, and relaxation packages.",
+    desc: "We specialize in professional makeup services for weddings, events, and everyday glam.",
   },
   {
     title: "Nail Tech",
@@ -102,7 +102,7 @@ export default function KKServicesPage() {
           What We Do at KKEmpire
         </h1>
         <p className="text-base md:text-lg text-empire-taupe dark:text-empire-sand mb-8 text-center max-w-2xl mx-auto">
-          Fashion, Beauty, and Lifestyle — All Under One Roof
+          A Brand that caters for all - Fashion, Beauty, and Lifestyle
         </p>
         <div className="flex flex-col md:flex-row gap-6 justify-center items-center flex-wrap">
           {brands.map((brand) => (
