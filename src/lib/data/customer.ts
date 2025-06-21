@@ -165,7 +165,7 @@ export const addCustomerAddress = async (
   const isDefaultBilling = (currentState.isDefaultBilling as boolean) || false
   const isDefaultShipping = (currentState.isDefaultShipping as boolean) || false
 
-  const address = {
+  const address: HttpTypes.StoreCreateCustomerAddress = {
     first_name: formData.get("first_name") as string,
     last_name: formData.get("last_name") as string,
     company: formData.get("company") as string,
@@ -175,9 +175,14 @@ export const addCustomerAddress = async (
     postal_code: formData.get("postal_code") as string,
     province: formData.get("province") as string,
     country_code: formData.get("country_code") as string,
-    phone: formData.get("phone") as string,
     is_default_billing: isDefaultBilling,
     is_default_shipping: isDefaultShipping,
+  }
+
+  const phone = formData.get("phone") as string | null
+
+  if (phone) {
+    address.phone = phone
   }
 
   const headers = {

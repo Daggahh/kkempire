@@ -1,6 +1,6 @@
 "use client"
 
-import { Badge, Heading, Input, Label, Text, Tooltip } from "@medusajs/ui"
+import { Badge, Heading, Input, Label, Text, Tooltip, TooltipProvider } from "@medusajs/ui"
 import React, { useActionState } from "react"
 
 import { applyPromotions, submitPromotionForm } from "@lib/data/cart"
@@ -52,131 +52,133 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
   const [message, formAction] = useActionState(submitPromotionForm, null)
 
   return (
-    <div className="w-full bg-white flex flex-col">
-      <div className="txt-medium">
-        <form action={(a) => addPromotionCode(a)} className="w-full mb-5">
-          <Label className="flex gap-x-1 my-2 items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              type="button"
-              className="txt-medium text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
-              data-testid="add-discount-button"
-            >
-              Add promotion or discount code
-            </button>
+    <TooltipProvider>
+      <div className="w-full bg-white flex flex-col">
+        <div className="txt-medium">
+          <form action={(a) => addPromotionCode(a)} className="w-full mb-5">
+            <Label className="flex gap-x-1 my-2 items-center">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                type="button"
+                className="txt-medium text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
+                data-testid="add-discount-button"
+              >
+                Add promotion or discount code
+              </button>
 
-            <Tooltip content="You can add multiple promotion/ discount codes">
-              <InformationCircleSolid color="var(--fg-muted)" />
-            </Tooltip>
-          </Label>
+              <Tooltip content="You can add multiple promotion/ discount codes">
+                <InformationCircleSolid color="var(--fg-muted)" />
+              </Tooltip>
+            </Label>
 
-          {isOpen && (
-            <>
-              <div className="flex w-full gap-x-2">
-                <Input
-                  className="size-full"
-                  id="promotion-input"
-                  name="code"
-                  type="text"
-                  autoFocus={false}
-                  data-testid="discount-input"
-                />
-                <SubmitButton
-                  variant="secondary"
-                  data-testid="discount-apply-button"
-                >
-                  Apply
-                </SubmitButton>
-              </div>
-
-              <ErrorMessage
-                error={message}
-                data-testid="discount-error-message"
-              />
-            </>
-          )}
-        </form>
-
-        {promotions.length > 0 && (
-          <div className="w-full flex items-center">
-            <div className="flex flex-col w-full">
-              <Heading className="txt-medium mb-2">
-                Promotion(s) applied:
-              </Heading>
-
-              {promotions.map((promotion) => {
-                return (
-                  <div
-                    key={promotion.id}
-                    className="flex items-center justify-between w-full max-w-full mb-2"
-                    data-testid="discount-row"
+            {isOpen && (
+              <>
+                <div className="flex w-full gap-x-2">
+                  <Input
+                    className="size-full"
+                    id="promotion-input"
+                    name="code"
+                    type="text"
+                    autoFocus={false}
+                    data-testid="discount-input"
+                  />
+                  <SubmitButton
+                    variant="secondary"
+                    data-testid="discount-apply-button"
                   >
-                    <Text className="flex gap-x-1 items-baseline txt-small-plus w-4/5 pr-1">
-                      <span className="truncate" data-testid="discount-code">
-                        <Badge
-                          color={promotion.is_automatic ? "green" : "grey"}
-                          size="small"
-                        >
-                          {promotion.code}
-                        </Badge>{" "}
-                        (
-                        {promotion.application_method?.value !== undefined &&
-                          promotion.application_method.currency_code !==
-                            undefined && (
-                            <>
-                              {promotion.application_method.type ===
-                              "percentage"
-                                ? `${promotion.application_method.value}%`
-                                : convertToLocale({
-                                    amount:
-                                      typeof promotion.application_method
-                                        .value === "string"
-                                        ? parseInt(
-                                            promotion.application_method.value,
-                                            10
-                                          )
-                                        : promotion.application_method.value ??
-                                          0,
-                                    currency_code:
-                                      promotion.application_method
-                                        .currency_code,
-                                  })}
-                            </>
-                          )}
-                        )
-                        {/* {promotion.is_automatic && (
-                          <Tooltip content="This promotion is automatically applied">
-                            <InformationCircleSolid className="inline text-zinc-400" />
-                          </Tooltip>
-                        )} */}
-                      </span>
-                    </Text>
-                    {!promotion.is_automatic && (
-                      <button
-                        className="flex items-center"
-                        onClick={() => {
-                          if (!promotion.code) {
-                            return
-                          }
+                    Apply
+                  </SubmitButton>
+                </div>
 
-                          removePromotionCode(promotion.code)
-                        }}
-                        data-testid="remove-discount-button"
-                      >
-                        <Trash size={14} />
-                        <span className="sr-only">
-                          Remove discount code from order
+                <ErrorMessage
+                  error={message}
+                  data-testid="discount-error-message"
+                />
+              </>
+            )}
+          </form>
+
+          {promotions.length > 0 && (
+            <div className="w-full flex items-center">
+              <div className="flex flex-col w-full">
+                <Heading className="txt-medium mb-2">
+                  Promotion(s) applied:
+                </Heading>
+
+                {promotions.map((promotion) => {
+                  return (
+                    <div
+                      key={promotion.id}
+                      className="flex items-center justify-between w-full max-w-full mb-2"
+                      data-testid="discount-row"
+                    >
+                      <Text className="flex gap-x-1 items-baseline txt-small-plus w-4/5 pr-1">
+                        <span className="truncate" data-testid="discount-code">
+                          <Badge
+                            color={promotion.is_automatic ? "green" : "grey"}
+                            size="small"
+                          >
+                            {promotion.code}
+                          </Badge>{" "}
+                          (
+                          {promotion.application_method?.value !== undefined &&
+                            promotion.application_method.currency_code !==
+                              undefined && (
+                              <>
+                                {promotion.application_method.type ===
+                                "percentage"
+                                  ? `${promotion.application_method.value}%`
+                                  : convertToLocale({
+                                      amount:
+                                        typeof promotion.application_method
+                                          .value === "string"
+                                          ? parseInt(
+                                              promotion.application_method.value,
+                                              10
+                                            )
+                                          : promotion.application_method.value ??
+                                            0,
+                                      currency_code:
+                                        promotion.application_method
+                                          .currency_code,
+                                    })}
+                              </>
+                            )}
+                          )
+                          {/* {promotion.is_automatic && (
+                            <Tooltip content="This promotion is automatically applied">
+                              <InformationCircleSolid className="inline text-zinc-400" />
+                            </Tooltip>
+                          )} */}
                         </span>
-                      </button>
-                    )}
-                  </div>
-                )
-              })}
+                      </Text>
+                      {!promotion.is_automatic && (
+                        <button
+                          className="flex items-center"
+                          onClick={() => {
+                            if (!promotion.code) {
+                              return
+                            }
+
+                            removePromotionCode(promotion.code)
+                          }}
+                          data-testid="remove-discount-button"
+                        >
+                          <Trash size={14} />
+                          <span className="sr-only">
+                            Remove discount code from order
+                          </span>
+                        </button>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+    </TooltipProvider>
   )
 }
 

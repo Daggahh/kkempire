@@ -122,15 +122,15 @@ export default async function Footer() {
                     ?.filter((c) => c.products && c.products.length > 0)
                     ?.slice(0, 6)
                     .map((c) => (
-                      <li key={c.id}>
-                        <LocalizedClientLink
-                          className="hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors"
-                          href={`/collections/${c.handle}`}
-                        >
-                          {c.title}
-                        </LocalizedClientLink>
-                      </li>
-                    ))}
+                    <li key={c.id}>
+                      <LocalizedClientLink
+                        className="hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors"
+                        href={`/collections/${c.handle}`}
+                      >
+                        {c.title}
+                      </LocalizedClientLink>
+                    </li>
+                  ))}
                 </ul>
               </div>
             )}

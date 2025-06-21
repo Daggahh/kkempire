@@ -88,6 +88,7 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
           {billingAddress.postal_code}, {billingAddress.city}
         </span>
         <span>{country}</span>
+        <span>{billingAddress.phone}</span>
       </div>
     )
   }, [billingAddress, regionOptions])
@@ -120,6 +121,14 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
               data-testid="billing-last-name-input"
             />
           </div>
+          <Input
+            label="Phone"
+            name="phone"
+            type="tel"
+            defaultValue={billingAddress?.phone || ""}
+            required
+            data-testid="billing-phone-input"
+          />
           <Input
             label="Company"
             name="company"
