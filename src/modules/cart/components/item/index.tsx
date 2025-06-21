@@ -46,7 +46,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
 
   return (
     <Table.Row className="w-full" data-testid="product-row">
-      <Table.Cell className="!pl-0 p-4 w-24">
+      <Table.Cell className="p-4 w-24">
         <LocalizedClientLink
           href={`/products/${item.product_handle}`}
           className={clx("flex", {
@@ -64,7 +64,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
 
       <Table.Cell className="text-left">
         <Text
-          className="txt-medium-plus text-ui-fg-base"
+          className="txt-medium-plus text-ui-fg-base truncate-product-title"
           data-testid="product-title"
         >
           {item.product_title}
@@ -114,7 +114,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
         </Table.Cell>
       )}
 
-      <Table.Cell className="!pr-0">
+      <Table.Cell className="">
         <span
           className={clx("!pr-0", {
             "flex flex-col items-end h-full justify-center": type === "preview",
@@ -142,3 +142,22 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
 }
 
 export default Item
+
+/**
+ * Aggressively truncate product title on mobile
+ */
+if (typeof window !== "undefined") {
+  const style = document.createElement("style")
+  style.innerHTML = `
+    @media (max-width: 640px) {
+      .truncate-product-title {
+        max-width: 300px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+      }
+    }
+  `
+  document.head.appendChild(style)
+}

@@ -1,7 +1,7 @@
 "use client"
 
 import { Badge, Heading, Input, Label, Text, Tooltip } from "@medusajs/ui"
-import React, { useActionState } from "react";
+import React, { useActionState } from "react"
 
 import { applyPromotions, submitPromotionForm } from "@lib/data/cart"
 import { convertToLocale } from "@lib/util/money"
@@ -62,12 +62,12 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
               className="txt-medium text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
               data-testid="add-discount-button"
             >
-              Add Promotion Code(s)
+              Add promotion or discount code
             </button>
 
-            {/* <Tooltip content="You can add multiple promotion codes">
+            <Tooltip content="You can add multiple promotion/ discount codes">
               <InformationCircleSolid color="var(--fg-muted)" />
-            </Tooltip> */}
+            </Tooltip>
           </Label>
 
           {isOpen && (
@@ -128,7 +128,15 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                               "percentage"
                                 ? `${promotion.application_method.value}%`
                                 : convertToLocale({
-                                    amount: promotion.application_method.value,
+                                    amount:
+                                      typeof promotion.application_method
+                                        .value === "string"
+                                        ? parseInt(
+                                            promotion.application_method.value,
+                                            10
+                                          )
+                                        : promotion.application_method.value ??
+                                          0,
                                     currency_code:
                                       promotion.application_method
                                         .currency_code,

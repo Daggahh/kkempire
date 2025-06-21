@@ -23,16 +23,8 @@ export default async function RelatedProducts({
   if (region?.id) {
     queryParams.region_id = region.id
   }
-  if (product.collection_id) {
-    queryParams.collection_id = [product.collection_id]
-  }
-  if (product.tags) {
-    queryParams.tag_id = product.tags
-      .map((t) => t.id)
-      .filter(Boolean) as string[]
-  }
   queryParams.is_giftcard = false
-  queryParams.limit = 5
+  queryParams.limit = 10
 
   const products = await listProducts({
     queryParams,
@@ -53,13 +45,13 @@ export default async function RelatedProducts({
         <span className="text-base-regular text-gray-600 mb-6">
           Related products
         </span>
-        <p className="text-2xl-regular text-ui-fg-base max-w-lg dark:text-black ">
+        <p className="text-2xl-regular text-ui-fg-base max-w-lg dark:text-empire-brown ">
           You might also want to check out these products.
         </p>
       </div>
 
       <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-6 gap-y-8">
-        {products.map((product) => (
+        {products.slice(0, 4).map((product) => (
           <li key={product.id}>
             <Product region={region} product={product} />
           </li>

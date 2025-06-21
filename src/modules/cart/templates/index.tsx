@@ -4,6 +4,7 @@ import EmptyCartMessage from "../components/empty-cart-message"
 import SignInPrompt from "../components/sign-in-prompt"
 import Divider from "@modules/common/components/divider"
 import { HttpTypes } from "@medusajs/types"
+import { TooltipProvider } from "@medusajs/ui"
 
 const CartTemplate = ({
   cart,
@@ -31,7 +32,9 @@ const CartTemplate = ({
                 {cart && cart.region && (
                   <>
                     <div className="bg-white py-6">
-                      <Summary cart={cart as any} />
+                      <TooltipProvider>
+                        <Summary cart={cart as any} />
+                      </TooltipProvider>
                     </div>
                   </>
                 )}

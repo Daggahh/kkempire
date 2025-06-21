@@ -133,8 +133,11 @@ const CartDropdown = ({
                         <div className="flex flex-col justify-between flex-1">
                           <div className="flex flex-col flex-1">
                             <div className="flex items-start justify-between">
-                              <div className="flex flex-col overflow-ellipsis whitespace-nowrap mr-4 w-[180px]">
-                                <h3 className="text-base-regular overflow-hidden text-ellipsis">
+                              <div className="flex flex-col overflow-hidden">
+                                <h3
+                                  className="text-base-regular overflow-hidden text-ellipsis whitespace-nowrap"
+                                  title={item.title}
+                                >
                                   <LocalizedClientLink
                                     href={`/products/${item.product_handle}`}
                                     data-testid="product-link"
@@ -153,13 +156,13 @@ const CartDropdown = ({
                                 >
                                   Quantity: {item.quantity}
                                 </span>
-                              </div>
-                              <div className="flex justify-end">
-                                <LineItemPrice
-                                  item={item}
-                                  style="tight"
-                                  currencyCode={cartState.currency_code}
-                                />
+                                <div className="flex justify-start mt-1">
+                                  <LineItemPrice
+                                    item={item}
+                                    style="tight"
+                                    currencyCode={cartState.currency_code}
+                                  />
+                                </div>
                               </div>
                             </div>
                           </div>
