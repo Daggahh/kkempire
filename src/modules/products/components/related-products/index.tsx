@@ -32,6 +32,7 @@ export default async function RelatedProducts({
       .filter(Boolean) as string[]
   }
   queryParams.is_giftcard = false
+  queryParams.limit = 5
 
   const products = await listProducts({
     queryParams,
@@ -52,7 +53,7 @@ export default async function RelatedProducts({
         <span className="text-base-regular text-gray-600 mb-6">
           Related products
         </span>
-        <p className="text-2xl-regular text-ui-fg-base max-w-lg">
+        <p className="text-2xl-regular text-ui-fg-base max-w-lg dark:text-black ">
           You might also want to check out these products.
         </p>
       </div>

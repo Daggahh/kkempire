@@ -6,13 +6,15 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
 import ThemeToggle from "@modules/layout/components/theme-toggle"
+import SearchButton from "@modules/layout/components/search"
+import UserAvatar from "@modules/layout/components/user-avatar"
 
 export default async function Nav() {
   const regions = await listRegions().then((regions: StoreRegion[]) => regions)
   return (
     <div className="sticky top-0 inset-x-0 z-50 group">
       <header className="relative h-16 mx-auto border-b duration-200 border-[#897366]/20 dark:border-empire-taupe/40">
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-empire-sand/20 dark:bg-empire-sand/50 backdrop-blur-md" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-empire-sand/20 dark:bg-empire-sand/50 backdrop-blur-md" />
         <nav className="content-container txt-xsmall-plus text-[#482A12] dark:text-empire-midnight flex items-center justify-between w-full h-full text-small-regular">
           <div className="flex-1 basis-0 h-full flex items-center">
             <div className="h-full">
@@ -28,16 +30,13 @@ export default async function Nav() {
               KKEMPIRE
             </LocalizedClientLink>
           </div>
-          <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
-          <ThemeToggle />
+          <div className="flex items-center gap-x-4 small:gap-x-6 h-full flex-1 basis-0 justify-end border-l border-[#897366]/20 pl-3 sm:pl-0">
+            <SearchButton />
+            <div className="hidden md:block">
+              <ThemeToggle />
+            </div>
             <div className="hidden small:flex items-center gap-x-6 h-full">
-              <LocalizedClientLink
-                className="text-[#482A12] dark:text-empire-midnight hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors duration-300"
-                href="/account"
-                data-testid="nav-account-link"
-              >
-                Account
-              </LocalizedClientLink>
+              <UserAvatar />
             </div>
             <Suspense
               fallback={

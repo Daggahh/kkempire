@@ -142,21 +142,14 @@ export default function ProductActions({
 
         <Button
           onClick={handleAddToCart}
-          disabled={
-            !inStock ||
-            !selectedVariant ||
-            !!disabled ||
-            isAdding ||
-            !isValidVariant
-          }
-          variant="primary"
-          className="w-full h-10"
+          disabled={!inStock || !selectedVariant || !!disabled || isAdding}
+          className="w-full h-10 bg-empire-gold text-empire-brown hover:bg-empire-brown hover:text-empire-gold disabled:opacity-50 dark:disabled:bg-empire-taupe/50 dark:disabled:text-white/50 transition-colors duration-200"
           isLoading={isAdding}
           data-testid="add-product-button"
         >
-          {!selectedVariant && !options
-            ? "Select variant"
-            : !inStock || !isValidVariant
+          {!selectedVariant
+            ? "Select options"
+            : !inStock
             ? "Out of stock"
             : "Add to cart"}
         </Button>

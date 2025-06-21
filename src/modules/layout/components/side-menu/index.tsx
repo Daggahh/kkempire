@@ -8,12 +8,14 @@ import { Fragment } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CountrySelect from "../country-select"
 import { HttpTypes } from "@medusajs/types"
+import ThemeToggle from "../theme-toggle"
 
 const SideMenuItems = {
   Home: "/",
   Store: "/store",
   Account: "/account",
   Cart: "/cart",
+  KKServices: "/kkservices",
 }
 
 const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
@@ -44,16 +46,23 @@ const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
                 leaveFrom="opacity-100 backdrop-blur-2xl"
                 leaveTo="opacity-0"
               >
-                <PopoverPanel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-50 inset-x-0 text-sm m-2 bg-empire-sand/20 dark:bg-empire-midnight/60 backdrop-blur-md border border-[#897366]/20 dark:border-empire-taupe/40 rounded-lg">
+                <PopoverPanel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-[100] inset-x-0 text-sm m-2 bg-empire-sand/20 dark:bg-empire-midnight/60 backdrop-blur-md border border-[#897366]/20 dark:border-empire-taupe/40 rounded-lg">
                   <div
                     data-testid="nav-menu-popup"
                     className="flex flex-col h-full justify-between p-6"
                   >
-                    <div className="flex justify-end" id="xmark">
+                    <div
+                      className="flex justify-end items-center relative z-[110]"
+                      id="xmark"
+                    >
+                      <div className="block small:hidden mr-4">
+                        <ThemeToggle />
+                      </div>
                       <button
                         data-testid="close-menu-button"
                         onClick={close}
-                        className="text-[#482A12] hover:text-[#D49D5D] transition-colors duration-300"
+                        className="text-[#482A12] hover:text-[#D49D5D] transition-colors duration-300 z-[120]"
+                        style={{ zIndex: 120 }}
                       >
                         <XMark />
                       </button>

@@ -111,20 +111,26 @@ export default async function Footer() {
                   className={clx(
                     "grid grid-cols-1 gap-2 text-[#897366] dark:text-empire-taupe txt-small",
                     {
-                      "grid-cols-2": (collections?.length || 0) > 3,
+                      "grid-cols-2":
+                        (collections?.filter(
+                          (c) => c.products && c.products.length > 0
+                        )?.length || 0) > 3,
                     }
                   )}
                 >
-                  {collections?.slice(0, 6).map((c) => (
-                    <li key={c.id}>
-                      <LocalizedClientLink
-                        className="hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors"
-                        href={`/collections/${c.handle}`}
-                      >
-                        {c.title}
-                      </LocalizedClientLink>
-                    </li>
-                  ))}
+                  {collections
+                    ?.filter((c) => c.products && c.products.length > 0)
+                    ?.slice(0, 6)
+                    .map((c) => (
+                      <li key={c.id}>
+                        <LocalizedClientLink
+                          className="hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors"
+                          href={`/collections/${c.handle}`}
+                        >
+                          {c.title}
+                        </LocalizedClientLink>
+                      </li>
+                    ))}
                 </ul>
               </div>
             )}
@@ -134,34 +140,36 @@ export default async function Footer() {
               </span>
               <ul className="grid grid-cols-1 gap-y-2 text-[#897366] dark:text-empire-taupe txt-small">
                 <li>
-                  <a
-                    href="https://github.com/medusajs"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://docs.medusajs.com"
-                    target="_blank"
-                    rel="noreferrer"
+                  <LocalizedClientLink
+                    href="/kkservices"
                     className="hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors"
                   >
                     About Us
-                  </a>
+                  </LocalizedClientLink>
                 </li>
                 <li>
-                  <a
-                    href="https://github.com/medusajs/nextjs-starter-medusa"
-                    target="_blank"
-                    rel="noreferrer"
+                  <LocalizedClientLink
+                    href="/customer-service"
                     className="hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors"
                   >
                     Contact
-                  </a>
+                  </LocalizedClientLink>
+                </li>
+                <li>
+                  <LocalizedClientLink
+                    href="/legal/privacy-policy"
+                    className="hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors"
+                  >
+                    Privacy Policy
+                  </LocalizedClientLink>
+                </li>
+                <li>
+                  <LocalizedClientLink
+                    href="/legal/terms"
+                    className="hover:text-[#D49D5D] dark:hover:text-empire-gold transition-colors"
+                  >
+                    Terms of Service
+                  </LocalizedClientLink>
                 </li>
               </ul>
             </div>

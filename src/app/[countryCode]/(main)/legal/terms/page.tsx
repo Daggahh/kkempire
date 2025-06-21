@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 export default function TermsOfService() {
   return (
     <section className="content-container py-24 max-w-3xl mx-auto">
-      <div className="bg-white p-8 rounded-lg shadow-md">
-        <h1 className="text-3xl-semi text-empire-brown dark:text-empire-sand mb-8 uppercase">
+      <div className="bg-white p-8 rounded-lg shadow-md transition-shadow duration-300 hover:shadow-xl">
+        <h1 className="text-3xl-semi text-empire-brown dark:text-empire-sand mb-8 uppercase tracking-wide transition-colors duration-300">
           Terms of Service
         </h1>
-        <div className="prose dark:prose-invert prose-headings:text-empire-brown dark:prose-headings:text-empire-sand prose-p:text-empire-taupe dark:prose-p:text-empire-taupe prose-a:text-empire-gold hover:prose-a:text-empire-brown dark:hover:prose-a:text-empire-sand prose-a:transition-colors prose-li:text-empire-taupe dark:prose-li:text-empire-taupe">
+        <div className="prose dark:prose-invert prose-headings:text-empire-brown dark:prose-headings:text-empire-sand prose-p:text-empire-taupe dark:prose-p:text-empire-taupe prose-a:text-empire-gold hover:prose-a:text-empire-brown dark:hover:prose-a:text-empire-sand prose-a:transition-colors prose-li:text-empire-taupe dark:prose-li:text-empire-taupe transition-colors duration-300">
           <p className="text-lg">
             Welcome to KKEMPIRE! These terms outline the rules and regulations
             for using our website and purchasing our products or booking

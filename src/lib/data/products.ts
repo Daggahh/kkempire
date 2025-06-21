@@ -10,6 +10,7 @@ import { getRegion, retrieveRegion } from "./regions"
 // Extended type to include collection_id and other missing properties
 interface ExtendedStoreProductParams extends HttpTypes.StoreProductParams {
   id?: string | string[]
+  handle?: string | string[]
   collection_id?: string | string[]
   collections?: string[]
   collection_ids?: string[]

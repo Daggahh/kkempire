@@ -34,11 +34,16 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
               onClick={() => updateOption(option.id, v)}
               key={v}
               className={clx(
-                "border-ui-border-base bg-ui-bg-subtle border text-small-regular h-10 rounded-rounded p-2 flex-1 ",
+                "h-10 rounded-md p-2 flex-1 text-sm font-medium transition-all duration-200",
+                "border text-empire-brown bg-transparent",
+                "hover:bg-empire-brown/5 dark:hover:bg-empire-sand/10",
+                "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-empire-gold",
                 {
-                  "border-ui-border-interactive": v === current,
-                  "hover:shadow-elevation-card-rest transition-shadow ease-in-out duration-150":
+                  "border-empire-brown/50 dark:border-empire-taupe/50":
                     v !== current,
+                  "border-empire-brown dark:border-empire-gold": v === current,
+                  "text-empire-brown/60 dark:text-empire-taupe/60 dark:disabled:text-white/50":
+                    disabled,
                 }
               )}
               disabled={disabled}

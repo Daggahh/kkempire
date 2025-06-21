@@ -1,3 +1,5 @@
+"use client"
+
 import { Container, clx } from "@medusajs/ui"
 import Image from "next/image"
 import React from "react"
@@ -22,12 +24,28 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   className,
   "data-testid": dataTestid,
 }) => {
-  const initialImage = thumbnail || images?.[0]?.url
+  const [hovered, setHovered] = React.useState(false)
+  const [hoverIndex, setHoverIndex] = React.useState(0)
+  const imageList =
+    images && images.length > 0 ? images : thumbnail ? [{ url: thumbnail }] : []
+  React.useEffect(() => {
+    if (hovered && imageList.length > 1) {
+      const interval = setInterval(() => {
+        setHoverIndex((prev) => (prev + 1) % imageList.length)
+      }, 900)
+      return () => clearInterval(interval)
+    } else {
+      setHoverIndex(0)
+    }
+  }, [hovered, imageList.length])
+
+  const displayImage =
+    imageList[hovered && imageList.length > 1 ? hoverIndex : 0]?.url
 
   return (
     <Container
       className={clx(
-        "relative w-full overflow-hidden p-4 bg-ui-bg-subtle shadow-elevation-card-rest rounded-large group-hover:shadow-elevation-card-hover transition-shadow ease-in-out duration-150",
+        "relative w-full overflow-hidden p-4 border border-empire-gold bg-empire-sand/60 dark:bg-empire-midnight shadow-elevation-card-rest rounded-large group-hover:shadow-elevation-card-hover transition-shadow ease-in-out duration-150",
         className,
         {
           "aspect-[11/14]": isFeatured,
@@ -40,8 +58,10 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
         }
       )}
       data-testid={dataTestid}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
-      <ImageOrPlaceholder image={initialImage} size={size} />
+      <ImageOrPlaceholder image={displayImage} size={size} />
     </Container>
   )
 }
@@ -54,9 +74,9 @@ const ImageOrPlaceholder = ({
     <Image
       src={image}
       alt="Thumbnail"
-      className="absolute inset-0 object-cover object-center"
+      className="absolute inset-0 object-cover object-center transition-opacity duration-500"
       draggable={false}
-      quality={50}
+      quality={90}
       sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
       fill
     />
