@@ -1,12 +1,13 @@
 "use client"
 
-import { isManual, isStripe } from "@lib/constants"
+import { isManual, isPaystack, isStripe } from "@lib/constants"
 import { placeOrder } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
 import { useElements, useStripe } from "@stripe/react-stripe-js"
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import ErrorMessage from "../error-message"
+import Paystack from "@paystack/inline-js"
 
 type PaymentButtonProps = {
   cart: HttpTypes.StoreCart
@@ -24,7 +25,9 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
     !cart.email ||
     (cart.shipping_methods?.length ?? 0) < 1
 
-  const paymentSession = cart.payment_collection?.payment_sessions?.[0]
+  const paymentSession = cart.payment_collection?.payment_sessions?.find(
+    (s) => s.status === "pending"
+  )
 
   switch (true) {
     case isStripe(paymentSession?.provider_id):
@@ -38,6 +41,14 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
     case isManual(paymentSession?.provider_id):
       return (
         <ManualTestPaymentButton notReady={notReady} data-testid={dataTestId} />
+      )
+    case isPaystack(paymentSession?.provider_id):
+      return (
+        <PaystackPaymentButton
+          notReady={notReady}
+          session={paymentSession}
+          data-testid={dataTestId}
+        />
       )
     default:
       return <Button disabled>Select a payment method</Button>
@@ -140,6 +151,7 @@ const StripePaymentButton = ({
         size="large"
         isLoading={submitting}
         data-testid={dataTestId}
+        className="bg-empire-gold text-white hover:bg-empire-brown disabled:bg-empire-taupe"
       >
         Place order
       </Button>
@@ -179,12 +191,99 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
         onClick={handlePayment}
         size="large"
         data-testid="submit-order-button"
+        className="bg-empire-gold text-white hover:bg-empire-brown disabled:bg-empire-taupe"
       >
         Place order
       </Button>
       <ErrorMessage
         error={errorMessage}
         data-testid="manual-payment-error-message"
+      />
+    </>
+  )
+}
+
+const PaystackPaymentButton = ({
+  session,
+  notReady,
+  "data-testid": dataTestId,
+}: {
+  session: HttpTypes.StorePaymentSession | undefined
+  notReady: boolean
+  "data-testid"?: string
+}) => {
+  const [submitting, setSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const paystackRef = useRef<Paystack | null>(null)
+
+  // Debug: Log the payment session object
+  console.log("Paystack payment session:", session)
+
+  // If the session is not ready, we don't want to render the button
+  if (notReady || !session) return null
+
+  // Get the accessCode added to the session data by the Paystack plugin
+  const { paystackTxAccessCode: accessCode } = session.data
+
+  // This explicit type check will fix the error and prevent runtime issues.
+  if (typeof accessCode !== "string") {
+    return (
+      <Button disabled className="bg-empire-taupe text-white">
+        Payment session not ready
+      </Button>
+    )
+  }
+
+  const handlePayment = () => {
+    setSubmitting(true)
+    setErrorMessage(null)
+
+    if (!paystackRef.current) {
+      paystackRef.current = new Paystack()
+    }
+
+    const paystack = paystackRef.current
+
+    paystack.resumeTransaction(accessCode, {
+      async onSuccess() {
+        // Call Medusa checkout complete here
+        await placeOrder()
+          .catch((err) => {
+            const message =
+              err instanceof Error ? err.message : "Could not place order."
+            setErrorMessage(message)
+          })
+          .finally(() => {
+            setSubmitting(false)
+          })
+      },
+      onError(error: unknown) {
+        const message =
+          error instanceof Error ? error.message : "Payment failed"
+        setErrorMessage(message)
+        setSubmitting(false)
+      },
+      onClose: () => {
+        setSubmitting(false) // Handle case where user closes the popup
+      },
+    })
+  }
+
+  return (
+    <>
+      <Button
+        disabled={notReady}
+        isLoading={submitting}
+        onClick={handlePayment}
+        size="large"
+        data-testid={dataTestId}
+        className="bg-empire-gold text-white hover:bg-empire-brown disabled:bg-empire-taupe"
+      >
+        Pay with Paystack
+      </Button>
+      <ErrorMessage
+        error={errorMessage}
+        data-testid="paystack-payment-error-message"
       />
     </>
   )

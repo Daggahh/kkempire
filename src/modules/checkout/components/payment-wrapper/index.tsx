@@ -4,7 +4,7 @@ import { loadStripe } from "@stripe/stripe-js"
 import React from "react"
 import StripeWrapper from "./stripe-wrapper"
 import { HttpTypes } from "@medusajs/types"
-import { isStripe } from "@lib/constants"
+import { isPaystack, isStripe } from "@lib/constants"
 
 type PaymentWrapperProps = {
   cart: HttpTypes.StoreCart
@@ -19,11 +19,9 @@ const PaymentWrapper: React.FC<PaymentWrapperProps> = ({ cart, children }) => {
     (s) => s.status === "pending"
   )
 
-  if (
-    isStripe(paymentSession?.provider_id) &&
-    paymentSession &&
-    stripePromise
-  ) {
+  const providerId = paymentSession?.provider_id
+
+  if (isStripe(providerId) && paymentSession && stripePromise) {
     return (
       <StripeWrapper
         paymentSession={paymentSession}
@@ -33,6 +31,10 @@ const PaymentWrapper: React.FC<PaymentWrapperProps> = ({ cart, children }) => {
         {children}
       </StripeWrapper>
     )
+  }
+
+  if (isPaystack(providerId) && paymentSession) {
+    return <div>{children}</div>
   }
 
   return <div>{children}</div>
