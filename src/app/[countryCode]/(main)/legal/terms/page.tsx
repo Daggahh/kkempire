@@ -29,7 +29,7 @@ export default function TermsOfService() {
 
           <h2 className="text-2xl mt-8">2. Products & Services</h2>
           <p>
-            We offer fashion items under KKWears and beauty services (hair, spa,
+            We offer fashion items under KKWears and beauty services (hair,
             nails, barbing). All purchases and bookings are subject to
             availability.
           </p>

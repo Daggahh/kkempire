@@ -10,12 +10,11 @@ export const metadata: Metadata = {
     default: "KKEmpire - Fashion, Beauty & Hair Services",
   },
   description:
-    "Discover KKEmpire - Your one-stop destination for fashion, beauty, and hair services. Featuring KKWears clothing, KK.Hairs styling, and KK.Beauty spa services.",
+    "Discover KKEmpire - Your one-stop destination for fashion, beauty, and hair services. Featuring KKWears clothing, KK.Hairs styling, and KK.Beauty services.",
   keywords: [
     "fashion",
     "beauty",
     "hair services",
-    "spa",
     "wig installation",
     "braiding",
     "nail tech",
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "en_NG",
     siteName: "KKEmpire",
   },
 }

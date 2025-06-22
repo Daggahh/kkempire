@@ -69,7 +69,7 @@ export default function CustomerService() {
                 Beauty Services
               </h3>
               <p className="text-empire-taupe dark:text-empire-taupe">
-                Book or reschedule hair, spa, nail, or barbing appointments.
+                Book or reschedule hair, nail, or barbing appointments.
               </p>
             </div>
           </div>

@@ -36,7 +36,7 @@ const brands = [
     icon: (
       <Sparkles className="w-7 h-7 text-empire-gold group-hover:text-empire-brown transition-colors" />
     ),
-    desc: "Beauty services including spa, nails, and more.",
+    desc: "Beauty services including nails, and more.",
     link: "https://www.instagram.com/kk.beautty/",
   },
   {

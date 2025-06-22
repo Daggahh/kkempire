@@ -13,7 +13,6 @@ export const metadata: Metadata = {
     "fashion",
     "beauty",
     "hair services",
-    "spa",
     "wig installation",
     "Nigerian fashion",
   ],
