@@ -1,6 +1,14 @@
 "use client"
 
-import { Badge, Heading, Input, Label, Text, Tooltip, TooltipProvider } from "@medusajs/ui"
+import {
+  Badge,
+  Heading,
+  Input,
+  Label,
+  Text,
+  Tooltip,
+  TooltipProvider,
+} from "@medusajs/ui"
 import React, { useActionState } from "react"
 
 import { applyPromotions, submitPromotionForm } from "@lib/data/cart"
@@ -15,9 +23,13 @@ type DiscountCodeProps = {
   cart: HttpTypes.StoreCart & {
     promotions: HttpTypes.StorePromotion[]
   }
+  isCheckoutSummary?: boolean
 }
 
-const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
+const DiscountCode: React.FC<DiscountCodeProps> = ({
+  cart,
+  isCheckoutSummary = false,
+}) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
   const { items = [], promotions = [] } = cart
@@ -53,21 +65,25 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
 
   return (
     <TooltipProvider>
-      <div className="w-full bg-white flex flex-col">
+      <div
+        className={`w-full flex flex-col ${
+          isCheckoutSummary ? "bg-white dark:bg-empire-dark" : "bg-white"
+        }`}
+      >
         <div className="txt-medium">
           <form action={(a) => addPromotionCode(a)} className="w-full mb-5">
             <Label className="flex gap-x-1 my-2 items-center">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
-                className="txt-medium text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
+                className="txt-medium text-ui-fg-interactive dark:text-empire-gold hover:text-ui-fg-interactive-hover dark:hover:text-empire-taupe"
                 data-testid="add-discount-button"
               >
                 Add promotion or discount code
               </button>
 
               <Tooltip content="You can add multiple promotion/ discount codes">
-                <InformationCircleSolid color="var(--fg-muted)" />
+                <InformationCircleSolid className="text-ui-fg-muted dark:text-empire-taupe" />
               </Tooltip>
             </Label>
 
@@ -84,6 +100,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                   />
                   <SubmitButton
                     variant="secondary"
+                    className="bg-empire-gold hover:bg-empire-taupe text-white dark:bg-empire-gold dark:hover:bg-empire-taupe dark:text-empire-dark"
                     data-testid="discount-apply-button"
                   >
                     Apply
@@ -101,7 +118,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
           {promotions.length > 0 && (
             <div className="w-full flex items-center">
               <div className="flex flex-col w-full">
-                <Heading className="txt-medium mb-2">
+                <Heading className="txt-medium mb-2 text-ui-fg-base dark:text-empire-gold">
                   Promotion(s) applied:
                 </Heading>
 
@@ -112,7 +129,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                       className="flex items-center justify-between w-full max-w-full mb-2"
                       data-testid="discount-row"
                     >
-                      <Text className="flex gap-x-1 items-baseline txt-small-plus w-4/5 pr-1">
+                      <Text className="flex gap-x-1 items-baseline txt-small-plus w-4/5 pr-1 text-ui-fg-subtle dark:text-empire-taupe">
                         <span className="truncate" data-testid="discount-code">
                           <Badge
                             color={promotion.is_automatic ? "green" : "grey"}
@@ -133,11 +150,12 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                                         typeof promotion.application_method
                                           .value === "string"
                                           ? parseInt(
-                                              promotion.application_method.value,
+                                              promotion.application_method
+                                                .value,
                                               10
                                             )
-                                          : promotion.application_method.value ??
-                                            0,
+                                          : promotion.application_method
+                                              .value ?? 0,
                                       currency_code:
                                         promotion.application_method
                                           .currency_code,
@@ -154,7 +172,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                       </Text>
                       {!promotion.is_automatic && (
                         <button
-                          className="flex items-center"
+                          className="flex items-center text-ui-fg-subtle dark:text-empire-taupe hover:text-ui-fg-base dark:hover:text-empire-gold"
                           onClick={() => {
                             if (!promotion.code) {
                               return
