@@ -15,7 +15,7 @@ const SideMenuItems = {
   Store: "/store",
   Account: "/account",
   Cart: "/cart",
-  KKServices: "/kkservices",
+  "KKEmpire Services": "/kkservices",
 }
 
 const SideMenu = ({ regions }: { regions: HttpTypes.StoreRegion[] | null }) => {
