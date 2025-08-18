@@ -70,7 +70,7 @@ Features include:
 
 Check out our demo video showcasing the features of this starter template:
 
-https://github.com/your-username/kkempire/raw/main/public/video/Screen%20Recording%202025-07-11%20063644.mp4
+https://github.com/Daggahh/kkempire/raw/main/public/video/Screen%20Recording%202025-07-11%20063644.mp4
 
 # Quickstart
 
