@@ -70,7 +70,10 @@ Features include:
 
 Check out our demo video showcasing the features of this starter template:
 
-https://github.com/your-username/kkempire/raw/main/public/video/Screen%20Recording%202025-07-11%20063644.mp4
+<video width="100%" controls>
+  <source src="public/video/Screen Recording 2025-07-11 063644.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 # Quickstart
 
