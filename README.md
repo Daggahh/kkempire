@@ -69,8 +69,10 @@ Features include:
 # Demo
 
 Check out our demo video showcasing the features of this starter template:
+
+
 <video width="100%" controls>
-  <source src="public/video/Screen Recording 2025-07-11 063644.mp4" type="video/mp4">
+   <source src="/video/Screen Recording 2025-07-11 063644.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
